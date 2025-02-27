@@ -24,6 +24,8 @@ address {
 }
 
 h1 {
+  display: flex;
+  flex-direction: column;
   font-family: "Raleway", bold;
   font-weight: 700;
   font-size: 100px;
@@ -108,11 +110,6 @@ header address {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-}
-
-h1 {
-  display: flex;
-  flex-direction: column;
 }
 
 h1 span:nth-child(2) {
