@@ -1,5 +1,5 @@
 body {
-  font-family: "Raleway";
+  font-family: "Raleway", "Arial", sans-serif;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
@@ -8,13 +8,13 @@ body {
 
 header,
 footer {
-  font-family: "Raleway";
+  font-family: "Raleway", "Arial", sans-serif;
   font-size: 18px;
 }
 
 a {
-  text-decoration: none;
-  border-bottom: 1px solid black;
+  text-decoration: none; /* Убрали стандартное подчеркивание ссылок */
+  border-bottom: 1px solid black; /* Добавили линию снизу */
 }
 
 address {
@@ -26,7 +26,7 @@ address {
 h1 {
   display: flex;
   flex-direction: column;
-  font-family: "Raleway", bold;
+  font-family: "Raleway", bold, "Arial", sans-serif;
   font-weight: 700;
   font-size: 100px;
   line-height: 115px;
@@ -36,7 +36,7 @@ h1 {
 }
 
 h2 {
-  font-family: "Raleway";
+  font-family: "Raleway", "Arial", sans-serif;
   font-weight: 700;
   font-size: 40px;
   line-height: 47px;
@@ -55,7 +55,7 @@ header address {
   justify-self: end;
 }
 
-.header__menu {
+.header__menu-list {
   width: 100%;
   line-height: 21.3px;
   text-transform: lowercase;
@@ -63,14 +63,24 @@ header address {
   list-style-type: none;
 }
 
-/* Центрируем элемент списка по вертикали */
-.header__menu li {
+/* Класс неподчеркнутых ссылок, например, кнопок*/
+.link-without-border {
+  border-bottom: 0;
+}
+
+/* Убираем подчеркивание у активной ссылки */
+.menu-link_active {
+  border-bottom: 0;
+}
+
+/* Центрируем элемент списка меню по вертикали */
+.header__menu-list li {
   display: flex;
   align-items: center;
 }
 
-/* Псевдокласс перед элементом списка, рисуем кружочек */
-.header__menu li::before {
+/* Псевдокласс перед элементом списка меню, рисуем кружочек */
+.header__menu-list li::before {
   content: "";
   width: 6px;
   height: 6px;
@@ -80,15 +90,9 @@ header address {
   margin: 4px 12px 0 12px;
 }
 
-/* У первого элемента меню не отображаем кружочек
- */
-.header__menu li:first-child::before {
+/* У первого элемента меню не отображаем кружочек*/
+.header__menu-list li:first-child::before {
   display: none;
-}
-
-/* У первого элемента меню отключаем подчеркивание */
-.header__menu li:first-child a {
-  border-bottom: 0;
 }
 
 .header__logo-image {
@@ -97,19 +101,14 @@ header address {
 }
 
 .cover {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("../images/cover.jpg");
-  background-size: cover;
   padding: 165px 50px 50px 50px;
 }
 
-/*  Не получилось наложить оверлей между картинкой и текстом z-index не помог */
-.overlay {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+.image-overlay {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    var(--image-url); /* Переменная содержит адрес картинки */
+  background-size: cover;
+  background-position: center;
 }
 
 h1 span:nth-child(2) {
@@ -145,7 +144,7 @@ h1 span:nth-child(3) {
   text-align: center;
   color: white;
   text-transform: uppercase;
-  border: 1px solid white;
+  border: 1px solid currentColor;
   background-color: transparent;
   padding: 12px 32px 11px 31px;
 }
@@ -160,6 +159,7 @@ h1 span:nth-child(3) {
 
 .lots__card-list {
   margin: 27px 0 30px;
+  list-style-type: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
@@ -172,40 +172,6 @@ h1 span:nth-child(3) {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
-}
-
-/* Так тоже не получилось сделать оверлей, накладывается поверх всего
- */
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: -1;
-}
-
-.card_type_film {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("../images/card-lot-01.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.card_type_book {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("../images/card-lot-02.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.card_type_picture {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("../images/card-lot-03.jpg");
-  background-size: cover;
-  background-position: center;
 }
 
 .card__title {
@@ -290,24 +256,17 @@ footer address {
 }
 
 .footer__menu-list {
-  width: 100%;
+  min-width: 164px;
   text-transform: lowercase;
-  white-space: nowrap;
   list-style-type: none;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* У первого элемента меню отключаем подчеркивание */
-.footer__menu-list li:first-child a {
-  border-bottom: 0;
-}
-
 .footer__social-list {
   min-width: 240px;
   justify-self: end;
-
   display: flex;
   justify-content: space-between;
 }
